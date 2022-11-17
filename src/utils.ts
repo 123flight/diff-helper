@@ -46,3 +46,16 @@ export const getOwnKeysForObj = (val: Record<string, any>): string[] => {
 
   return Object.keys(val).filter(key => val.hasOwnProperty(key))
 }
+
+export const deepCloneObj = (obj = {}) => {
+  let newObj = null;
+  if (typeof (obj) === 'object' && obj !== null) {
+    newObj = obj instanceof Array ? [] : {};
+    for (let i in obj) {
+      newObj[i] = deepCloneObj(obj[i])
+    }
+  } else {
+    newObj = obj;
+  }
+  return newObj;
+}

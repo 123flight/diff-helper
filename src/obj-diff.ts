@@ -1,4 +1,4 @@
-import { getOwnKeysForObj, isRealObject } from "./utils"
+import { getOwnKeysForObj, isRealObject, deepCloneObj } from "./utils"
 
 interface simpleDiffObjOptions {
   empty?: null | ''
@@ -43,7 +43,7 @@ export const simpleObjDiff = (
     }
 
     if (JSON.stringify(newVal[key]) !== JSON.stringify(oldVal[key])) {
-      diffResult[key] = needCopy ? JSON.parse(JSON.stringify(newVal)) : newVal[key]
+      diffResult[key] = needCopy ? deepCloneObj(newVal) : newVal[key]
     }
   })
 
